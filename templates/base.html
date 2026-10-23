@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site.institution_name|default:"Instituto Superior Dom Bosco" }}{% endblock %}</title>
+  <meta name="description" content="Conheça o Instituto Superior Dom Bosco, os cursos, notícias e informações institucionais.">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+<div class="topbar"><div class="container topbar-inner"><span>Instituto Superior Dom Bosco · Moçambique</span><span>Formação · Conhecimento · Serviço</span></div></div>
+<header class="header"><div class="container nav">
+  <a class="brand" href="{% url 'home' %}">
+    {% if site.logo %}<img class="logo" src="{{ site.logo.url }}" alt="Logótipo ISDB">{% else %}<span class="logo-placeholder">ISDB</span>{% endif %}
+    <span><strong>INSTITUTO SUPERIOR</strong><small>DOM BOSCO</small></span>
+  </a>
+  <button class="menu-toggle" aria-label="Abrir menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <nav class="nav-links"><a href="{% url 'home' %}">Início</a><a href="{% url 'home' %}#instituicao">Instituição</a><a href="{% url 'course_list' %}">Cursos</a><a href="{% url 'news_list' %}">Notícias</a><a href="{% url 'home' %}#contactos">Contactos</a><a class="nav-cta" href="{% url 'home' %}#admissoes">Admissões</a></nav>
+</div></header>
+{% if messages %}<div class="container flash-wrap">{% for message in messages %}<div class="flash {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% block content %}{% endblock %}
+<footer class="footer" id="contactos"><div class="container footer-grid">
+  <div><h3>{{ site.institution_name|default:"Instituto Superior Dom Bosco" }}</h3><p>Vitrine digital institucional. Consulte os canais oficiais para confirmar informações, cursos e prazos.</p></div>
+  <div><h4>Navegação</h4><a href="{% url 'course_list' %}">Cursos</a><a href="{% url 'news_list' %}">Notícias</a><a href="{% url 'home' %}#admissoes">Admissões</a></div>
+  <div><h4>Contactos oficiais</h4>{% if site.email %}<p>✉ {{ site.email }}</p>{% else %}<p>Adicionar e-mail oficial no painel</p>{% endif %}{% if site.phone %}<p>☎ {{ site.phone }}</p>{% endif %}{% if site.address %}<p>⌖ {{ site.address }}</p>{% endif %}</div>
+</div><div class="container copyright">© {% now "Y" %} {{ site.institution_name|default:"Instituto Superior Dom Bosco" }}. Todos os direitos reservados.</div></footer>
+</body></html>

@@ -1,0 +1,15 @@
+[project]
+name = "isdb-django"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "Django>=5.1,<5.3",
+    "Pillow>=10.4",
+    "psycopg[binary]>=3.2",
+]
+
+[tool.vercel]
+entrypoint = "config.wsgi:application"
+
+[tool.vercel.scripts]
+build = "python build.py"
